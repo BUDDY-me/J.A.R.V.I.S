@@ -1,0 +1,134 @@
+/* =========================
+   GLOBAL THEME
+========================= */
+:root {
+  --accent: #22d3ee;
+  --accent-bg: rgba(34, 211, 238, 0.1);
+  --accent-border: rgba(34, 211, 238, 0.5);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: system-ui;
+}
+
+/* =========================
+   HUD ROOT
+========================= */
+.hud {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 1s ease;
+}
+
+.hud.snap {
+  filter: brightness(0.2) contrast(2.2) saturate(0);
+}
+
+/* =========================
+   ARC REACTOR
+========================= */
+.reactor {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 25px var(--accent))
+          drop-shadow(0 0 50px var(--accent));
+
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.reactor-glow {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  z-index: -1;
+  animation: glow 2s infinite ease-in-out;
+}
+
+/* SNAP REACTOR EFFECT */
+.reactor.snap .reactor-img {
+  transform: scale(0.5) rotate(180deg);
+  opacity: 0.2;
+  filter: blur(2px);
+}
+
+/* =========================
+   DUST PARTICLES
+========================= */
+.dust {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: dustFade 1.2s forwards;
+}
+
+@keyframes dustFade {
+  0% {
+    opacity: 1;
+    transform: translate(0,0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(1.5);
+    filter: blur(6px);
+  }
+}
+
+/* =========================
+   SNAP WAVE
+========================= */
+.snap-wave {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: wave 1.5s forwards;
+}
+
+@keyframes wave {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(25); opacity: 0; }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glow {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
